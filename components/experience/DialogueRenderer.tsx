@@ -25,10 +25,11 @@ export default function DialogueRenderer({ segment }: DialogueRendererProps) {
                 )}
             >
                 <div className={cn(
-                    "flex flex-col max-w-[90%] w-full rounded-2xl p-6 backdrop-blur-sm border",
+                    "flex flex-col max-w-[90%] w-full rounded-2xl p-6 border",
+                    "will-change-transform", // Hint for scale animation
                     isWriter
-                        ? "bg-cyan-950/20 border-cyan-500/20 shadow-[0_0_40px_-15px_rgba(6,182,212,0.3)]"
-                        : "bg-amber-950/20 border-amber-500/20 shadow-[0_0_40px_-15px_rgba(245,158,11,0.3)]"
+                        ? "bg-cyan-950/40 border-cyan-500/20 shadow-[0_0_40px_-15px_rgba(6,182,212,0.3)]"
+                        : "bg-amber-950/40 border-amber-500/20 shadow-[0_0_40px_-15px_rgba(245,158,11,0.3)]"
                 )}>
                     <span className={cn(
                         "text-[10px] uppercase tracking-[0.3em] font-semibold mb-2 block",

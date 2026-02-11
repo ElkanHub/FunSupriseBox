@@ -76,7 +76,7 @@ export default function HoldInteraction({ onComplete }: { onComplete: () => void
                     onPointerDown={handlePointerDown}
                     onPointerUp={handlePointerUp}
                     onPointerLeave={handlePointerUp}
-                    className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-sm border border-white/30 flex items-center justify-center text-xs text-white uppercase tracking-wider select-none"
+                    className="w-16 h-16 rounded-full bg-white/20 border border-white/30 flex items-center justify-center text-xs text-white uppercase tracking-wider select-none will-change-transform"
                 >
                     Hold
                 </motion.button>

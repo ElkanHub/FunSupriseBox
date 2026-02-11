@@ -9,37 +9,39 @@ interface FloatingShapesProps {
 
 export default function FloatingShapes({ emotion }: FloatingShapesProps) {
     const shapes = useMemo(() => {
-        const count = 15;
+        // Reduced from 15 to 8 for better performance on mobile
+        const count = 8;
         return Array.from({ length: count }).map((_, i) => ({
             id: i,
             x: Math.random() * 100,
             y: Math.random() * 100,
-            size: Math.random() * 60 + 20,
-            duration: Math.random() * 20 + 10,
+            size: Math.random() * 60 + 30, // Slightly larger average for less overlap
+            duration: Math.random() * 25 + 15, // Slower is cheaper
             delay: Math.random() * 5,
             type: Math.random() > 0.5 ? "circle" : "blob",
         }));
     }, []);
 
     const getShapeStyles = () => {
+        // Optimized blurs: standardizing and reducing intensity
         switch (emotion) {
             case "sad":
                 return "fill-blue-500/10 blur-xl";
             case "hopeful":
-                return "fill-purple-500/10 blur-lg";
+                return "fill-purple-500/10 blur-xl";
             case "intense":
-                return "fill-red-500/15 blur-2xl animate-pulse";
+                return "fill-red-500/10 blur-xl";
             case "joy":
-                return "fill-yellow-400/10 blur-md";
+                return "fill-yellow-400/10 blur-lg";
             case "curious":
-                return "fill-emerald-400/10 blur-lg";
+                return "fill-emerald-400/10 blur-xl";
             default:
                 return "fill-cyan-500/10 blur-xl";
         }
     };
 
     return (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
             {shapes.map((shape) => (
                 <motion.div
                     key={shape.id}
@@ -47,12 +49,12 @@ export default function FloatingShapes({ emotion }: FloatingShapesProps) {
                     style={{
                         left: `${shape.x}%`,
                         top: `${shape.y}%`,
+                        willChange: "transform", // Hint to GPU
                     }}
                     animate={{
-                        y: [0, -100, 0],
-                        x: [0, 50, 0],
-                        rotate: [0, 360],
-                        scale: [1, 1.2, 1],
+                        y: [0, -60, 0],
+                        x: [0, 40, 0],
+                        opacity: [0.3, 0.6, 0.3], // Simpler opacity animation instead of rotate/scale for perf
                     }}
                     transition={{
                         duration: shape.duration,

@@ -83,7 +83,7 @@ export default function ConnectInteraction({ onComplete }: { onComplete: () => v
                 onDragEnd={handleDragEnd}
                 style={{ x, y }}
                 animate={isComplete ? { scale: 0.8, opacity: 0.5 } : { scale: 1 }}
-                className={`z-10 w-8 h-8 rounded-full border border-white/40 flex items-center justify-center cursor-grab active:cursor-grabbing backdrop-blur-sm transition-colors duration-300 ${isComplete ? 'bg-cyan-500/40 border-cyan-400' : 'bg-white/5 hover:bg-white/10'}`}
+                className={`z-10 w-8 h-8 rounded-full border border-white/40 flex items-center justify-center cursor-grab active:cursor-grabbing will-change-transform transition-colors duration-300 ${isComplete ? 'bg-cyan-500/60 border-cyan-400' : 'bg-white/10 hover:bg-white/20'}`}
             >
                 <div className={`w-2 h-2 rounded-full ${isComplete ? 'bg-white' : 'bg-cyan-400 shadow-[0_0_8px_#22d3ee]'}`} />
             </motion.div>
