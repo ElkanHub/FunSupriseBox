@@ -7,6 +7,7 @@ import { introYes, introNo } from "@/lib/data/introDialogue";
 import DialogueRenderer from "./DialogueRenderer";
 import InteractionManager from "./InteractionManager";
 import VisualsManager from "./VisualsManager";
+import FloatingShapes from "./FloatingShapes";
 import { Button } from "@/components/ui/button";
 
 export default function ExperienceContainer() {
@@ -55,21 +56,23 @@ export default function ExperienceContainer() {
     }
 
     return (
-        <div className="relative w-full h-screen overflow-hidden flex flex-col justify-center items-center">
+        <div className="relative w-full h-screen overflow-hidden flex flex-col justify-center items-center font-sans tracking-tight">
             <VisualsManager
                 speaker={currentSegment.speaker}
                 emotion={currentSegment.emotion}
             />
 
-            <div className="z-10 w-full max-w-md px-6 flex flex-col items-center gap-8">
+            <div className="z-10 w-full max-w-2xl px-6 flex flex-col items-center gap-12 sm:gap-16">
                 <DialogueRenderer
                     segment={currentSegment}
                 />
 
-                <InteractionManager
-                    type={currentSegment.interactionType}
-                    onComplete={handleNext}
-                />
+                <div className="flex-shrink-0">
+                    <InteractionManager
+                        type={currentSegment.interactionType}
+                        onComplete={handleNext}
+                    />
+                </div>
             </div>
         </div>
     );
