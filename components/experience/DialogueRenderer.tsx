@@ -12,7 +12,7 @@ export default function DialogueRenderer({ segment }: DialogueRendererProps) {
     const isWriter = segment.speaker === "Writer";
 
     return (
-        <div className="w-full min-h-[200px] flex flex-col justify-center">
+        <div className="w-full flex flex-col justify-center min-h-[30vh]">
             <motion.div
                 key={segment.id}
                 initial={{ opacity: 0, y: 20, scale: 0.95 }}
@@ -20,23 +20,32 @@ export default function DialogueRenderer({ segment }: DialogueRendererProps) {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
                 className={cn(
-                    "flex flex-col gap-2 max-w-[90%]",
+                    "flex flex-col gap-3 w-full",
                     isWriter ? "self-start items-start" : "self-end items-end"
                 )}
             >
-                <span className={cn(
-                    "text-xs uppercase tracking-widest opacity-50",
-                    isWriter ? "text-cyan-400" : "text-amber-400"
+                <div className={cn(
+                    "flex flex-col max-w-[90%] w-full rounded-2xl p-6 backdrop-blur-sm border",
+                    isWriter
+                        ? "bg-cyan-950/20 border-cyan-500/20 shadow-[0_0_40px_-15px_rgba(6,182,212,0.3)]"
+                        : "bg-amber-950/20 border-amber-500/20 shadow-[0_0_40px_-15px_rgba(245,158,11,0.3)]"
                 )}>
-                    {segment.speaker}
-                </span>
+                    <span className={cn(
+                        "text-[10px] uppercase tracking-[0.3em] font-semibold mb-2 block",
+                        isWriter ? "text-cyan-400" : "text-amber-400"
+                    )}>
+                        {segment.speaker}
+                    </span>
 
-                <p className={cn(
-                    "text-xl md:text-3xl font-light leading-relaxed",
-                    isWriter ? "text-left text-cyan-50" : "text-right text-amber-50"
-                )}>
-                    {segment.text}
-                </p>
+                    <div className="max-h-[50vh] overflow-y-auto scrollbar-hide pr-2">
+                        <p className={cn(
+                            "text-xl md:text-2xl font-light leading-relaxed tracking-wide",
+                            isWriter ? "text-left text-cyan-50" : "text-right text-amber-50"
+                        )}>
+                            {segment.text}
+                        </p>
+                    </div>
+                </div>
             </motion.div>
         </div>
     );

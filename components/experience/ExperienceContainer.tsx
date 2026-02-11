@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 
 export default function ExperienceContainer() {
     const [hasStarted, setHasStarted] = useState(false);
+    const [hasAcknowledgedTitle, setHasAcknowledgedTitle] = useState(false);
     const [introSelection, setIntroSelection] = useState<"yes" | "no" | null>(null);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isEnded, setIsEnded] = useState(false);
@@ -24,9 +25,13 @@ export default function ExperienceContainer() {
 
     const currentSegment = fullDialogue[currentIndex];
 
-    const handleStart = (selection: "yes" | "no") => {
+    const handleStartQuestion = (selection: "yes" | "no") => {
         setIntroSelection(selection);
         setHasStarted(true);
+    };
+
+    const handleAcknowledgeTitle = () => {
+        setHasAcknowledgedTitle(true);
     };
 
     const handleNext = () => {
@@ -42,7 +47,11 @@ export default function ExperienceContainer() {
     }
 
     if (!hasStarted) {
-        return <IntroSequence onStart={handleStart} />;
+        return <IntroSequence onStart={handleStartQuestion} />;
+    }
+
+    if (!hasAcknowledgedTitle) {
+        return <TitleSettingScreen onBegin={handleAcknowledgeTitle} />;
     }
 
     return (
@@ -62,6 +71,45 @@ export default function ExperienceContainer() {
                     onComplete={handleNext}
                 />
             </div>
+        </div>
+    );
+}
+
+function TitleSettingScreen({ onBegin }: { onBegin: () => void }) {
+    return (
+        <div className="flex flex-col items-center justify-center h-screen bg-black text-white gap-12 p-8 text-center">
+            <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1.5 }}
+                className="space-y-4"
+            >
+                <h1 className="text-4xl md:text-6xl font-thin tracking-[0.3em] uppercase text-cyan-500">
+                    The Unspoken Void
+                </h1>
+                <p className="text-sm md:text-base font-light tracking-widest text-slate-400 uppercase">
+                    Setting: A digital whisper between worlds
+                </p>
+            </motion.div>
+
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 2, duration: 1 }}
+                className="space-y-6 flex flex-col items-center"
+            >
+                <div className="w-12 h-[1px] bg-slate-700" />
+                <p className="text-xl font-extralight italic text-slate-300 max-w-sm">
+                    Welcome... prepare to read a story that wasn't meant for eyes to see.
+                </p>
+                <Button
+                    onClick={onBegin}
+                    variant="ghost"
+                    className="mt-8 border border-white/20 hover:bg-white hover:text-black transition-all duration-500 px-8 py-6 rounded-none tracking-widest uppercase text-xs"
+                >
+                    Enter the Void
+                </Button>
+            </motion.div>
         </div>
     );
 }
