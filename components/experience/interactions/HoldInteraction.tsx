@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 
 export default function HoldInteraction({ onComplete }: { onComplete: () => void }) {
