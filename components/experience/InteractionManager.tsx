@@ -9,6 +9,7 @@ import RevealInteraction from "./interactions/RevealInteraction";
 import TypeInteraction from "./interactions/TypeInteraction";
 import CatchInteraction from "./interactions/CatchInteraction";
 import PuzzleInteraction from "./interactions/PuzzleInteraction";
+import ConnectInteraction from "./interactions/ConnectInteraction";
 import { motion } from "framer-motion";
 
 interface InteractionManagerProps {
@@ -34,6 +35,7 @@ export default function InteractionManager({ type, onComplete }: InteractionMana
             {type === "type" && <TypeInteraction onComplete={onComplete} />}
             {type === "catch" && <CatchInteraction onComplete={onComplete} />}
             {type === "puzzle" && <PuzzleInteraction onComplete={onComplete} />}
+            {type === "connect" && <ConnectInteraction onComplete={onComplete} />}
         </motion.div>
     );
 }

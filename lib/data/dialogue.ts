@@ -9,6 +9,7 @@ export type InteractionType =
     | "shake"
     | "puzzle"
     | "catch"
+    | "connect"
     | "reveal";
 
 export interface DialogueSegment {
@@ -74,7 +75,7 @@ export const dialogueData: DialogueSegment[] = [
         speaker: "Other",
         text: "A ghost? No. You were the only thing that felt real. But I didn't know how to bridge the gap without seeming fragile. I thought \"restoration\" meant fixing myself first.",
         emotion: "hopeful",
-        interactionType: "puzzle",
+        interactionType: "connect",
     },
     {
         id: "9",
