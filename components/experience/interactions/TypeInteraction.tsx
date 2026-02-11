@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 export default function TypeInteraction({ onComplete }: { onComplete: () => void }) {
@@ -15,7 +14,7 @@ export default function TypeInteraction({ onComplete }: { onComplete: () => void
 
     return (
         <div className="flex flex-col items-center gap-4">
-            <span className="text-white/40 text-xs uppercase tracking-widest">Type "{targetWord}"</span>
+            <span className="text-white/40 text-xs uppercase tracking-widest">Type &quot;{targetWord}&quot;</span>
             <input
                 autoFocus
                 value={input}
